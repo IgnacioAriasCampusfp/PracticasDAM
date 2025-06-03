@@ -154,4 +154,12 @@ public class ProductoDAO {
         }
         return lista;
     }
+    public void cerrarConexion() {
+    	try {
+			conexion.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 }

@@ -1,7 +1,7 @@
 package com.akihabara.market.view;
 
 import com.akihabara.market.model.ProductoOtaku;
-import com.akihabara.market.dao.ProductoDAO;
+import com.akihabara.market.dao.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -162,6 +162,7 @@ public class InterfazConsola {
 
                     case 0:
                         System.out.println("Cerrando programa");
+                        dao.cerrarConexion();
                         break;
 
                     default:
