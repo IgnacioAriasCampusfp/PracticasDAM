@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.*;
 
 import com.akihabara.market.dao.ProductoDAO;
+import com.akihabara.market.llm.LlmService;
 import com.akihabara.market.model.ProductoOtaku;
 
 
@@ -30,6 +31,7 @@ public class InterfazGrafica extends JFrame{
         JButton agregarProductos = new JButton("Añadir productos");
         JButton editarProductos = new JButton("Editar productos");
         JButton eliminarProductos = new JButton("Eliminar producto");
+        JButton sugerirProductos = new JButton("Sugerir nombre producto");
         
         
         //Realizamos una actionListener para a la hora de clicar el boton
@@ -155,6 +157,32 @@ public class InterfazGrafica extends JFrame{
         	}
         });
         
+        sugerirProductos.addActionListener(e -> {
+            String[] tipos = {"Figura", "Manga", "Póster", "Llavero", "Ropa"};
+            String[] franquicias = {"Naruto", "One Piece", "Dragon Ball", "My Hero Academia", "Attack on Titan"};
+
+            JComboBox<String> tipoBox = new JComboBox<>(tipos);
+            JComboBox<String> franquiciaBox = new JComboBox<>(franquicias);
+
+            Object[] campos = {
+                "Tipo de producto:", tipoBox,
+                "Franquicia:", franquiciaBox
+            };
+
+            int result = JOptionPane.showConfirmDialog(null, campos, "Sugerencia de nombre", JOptionPane.OK_CANCEL_OPTION);
+
+            if (result == JOptionPane.OK_OPTION) {
+                String tipo = (String) tipoBox.getSelectedItem();
+                String franquicia = (String) franquiciaBox.getSelectedItem();
+
+                String sugerencia = LlmService.sugerirNombreProducto(tipo, franquicia);
+
+                JOptionPane.showMessageDialog(null, sugerencia, "Nombre sugerido", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        
+        
         //Inicilizamos el panel con los botones
         JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
         eliminarProductos.setBackground(Color.red);
@@ -163,6 +191,7 @@ public class InterfazGrafica extends JFrame{
         panel.add(agregarProductos);
         panel.add(editarProductos);
         panel.add(eliminarProductos);
+        panel.add(sugerirProductos);
         add(panel, BorderLayout.CENTER);
 
 
