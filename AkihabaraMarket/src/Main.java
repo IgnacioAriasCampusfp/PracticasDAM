@@ -12,6 +12,7 @@ public class Main {
 
 		//InterfazConsola.menu();
 		
+	
 		//Atraves del SwingUtilities llamamos al constructor de interfazGrafica y ponemos que sea visible
 		SwingUtilities.invokeLater(() -> {
             new InterfazGrafica().setVisible(true);
